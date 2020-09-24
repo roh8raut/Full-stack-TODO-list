@@ -1,3 +1,4 @@
 pom.xml
 techgig_new_main.js
 **/node_modules
+.env
