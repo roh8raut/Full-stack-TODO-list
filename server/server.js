@@ -16,18 +16,17 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
 var whitelist = ['http://localhost:3000', 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'];
 var corsOptions = {
   origin: function (origin, callback) {
-    callback(null, true);
     console.log(origin);
-    // try {
-    //   console.log(origin)
-    //   if (whitelist.indexOf(origin) === -1) {
-    //     callback(new Error('Not allowed by CORS'), false);
-    //   } else {
-    //     callback(null, true);
-    //   }
-    // } catch (e) {
-    //   res.status(401).send(e)
-    // }
+    try {
+      console.log(origin)
+      if (whitelist.indexOf(origin) === -1) {
+        callback(new Error('Not allowed by CORS'), false);
+      } else {
+        callback(null, true);
+      }
+    } catch (e) {
+      res.status(401).send(e)
+    }
   }
 }
 
