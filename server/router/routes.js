@@ -42,7 +42,7 @@ router.post('/addtask', authentication, async (req, res) => {
         user.tasks.push({ isCompleted, description });
 
         await user.save();
-        res.status(200).send({ status: "SUC" });
+        res.status(200).send({ status: "SUC", tasks: user.tasks });
     } catch (e) {
         console.log(e);
         res.status(400).send({ status: "FAIL", msg: "Something went wrong" });
@@ -61,7 +61,7 @@ router.delete('/removetask', authentication, async (req, res) => {
         const user = req.user;
         user.tasks.pull({ _id: taskId });
         await user.save();
-        res.status(200).send({ msg: "SUC" });
+        res.status(200).send({ msg: "SUC", tasks: user.tasks });
     } catch (e) {
         console.log(e);
         res.status(400).send({ msg: "FAIL" });
