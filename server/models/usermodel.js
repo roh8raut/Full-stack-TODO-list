@@ -33,17 +33,18 @@ const UserSchema = new mongoose.Schema({
     }]
 });
 
-UserSchema.pre('save', async function(next) {
+UserSchema.pre('save', async function (next) {
     if (this.isModified("password")) {
-        console.log("inside if ");
-        const hash = await bcrypt.hash(this.password, 8 );
+        const hash = await bcrypt.hash(this.password, 8);
         this.password = hash;
     }
     next();
 });
 
 UserSchema.methods.generateToken = async function () {
-    const token = jwt.sign({ id: this._id}, process.env.JWT_KEY);
+    const token = jwt.sign({ id: this._id }, process.env.JWT_KEY, {
+        expiresIn: '2h'
+    });
     return token
 }
 
@@ -55,7 +56,7 @@ UserSchema.statics.doesUserExists = async function (body) {
     if (!user) {
         throw new Error("User does not exists");
     }
-    
+
     const isMatch = await bcrypt.compare(password, user.password);
     console.log(isMatch);
     if (!isMatch) {
