@@ -1,6 +1,20 @@
-.App {
-  text-align: center;
+body {
+  background-color: #2d4059;
 }
+
+.header {
+  color: #e5e5e5;
+}
+
+.btn {
+  background-color: #ea5455 !important;
+  color: #f9cccc !important;
+}
+
+.btn:disabled {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+}
+
 
 .App-logo {
   height: 40vmin;

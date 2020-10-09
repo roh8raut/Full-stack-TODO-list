@@ -3,6 +3,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Field, reduxForm } from 'redux-form';
 import validate from '../../helpers/validate';
+import Error from '../error/error';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
 
 const renderEmailField = ({ input, label, meta, ...custom }) => (
     <TextField
@@ -10,6 +14,7 @@ const renderEmailField = ({ input, label, meta, ...custom }) => (
         label={label}
         variant="outlined"
         margin="normal"
+        autoComplete='off'
         error={meta.touched && !meta.valid}
         helperText={meta.touched && meta.error}
         {...input}
@@ -20,18 +25,19 @@ const renderPasswordField = ({ input, label, meta, ...custom }) => (
     <TextField
         className={custom.className}
         label={label}
+        type="password"
         variant="outlined"
         margin="normal"
+        autoComplete='off'
         error={meta.touched && !meta.valid}
         helperText={meta.touched && meta.error}
         {...input}
     />
 )
 
-const Login = ({ fixedWidth, handleSubmit, pristine, isLoading, errorMsg }) => {
+const Login = ({ fixedWidth, handleSubmit, pristine, isLoading, msg }) => {
     return (
         <form onSubmit={handleSubmit}>
-            {errorMsg && errorMsg.status === "FAIL" && <h3>Invalid Credentails.</h3>}
             <div>
                 <Field
                     name="email"
@@ -48,8 +54,11 @@ const Login = ({ fixedWidth, handleSubmit, pristine, isLoading, errorMsg }) => {
                     className={fixedWidth}
                 />
             </div>
+            {msg && <Error msg={msg} />}
             <div>
-                <Button className={fixedWidth} disabled={pristine} variant="contained" color="primary" type="submit" >{isLoading ? "Loading..." : "Submit"}</Button>
+                <Button className={`btn ${fixedWidth}`} disabled={pristine} variant="contained" type="submit" >
+                    {isLoading ? <CircularProgress /> : "Submit"}
+                </Button>
             </div>
         </form>
     )

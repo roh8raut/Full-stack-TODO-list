@@ -1,24 +1,27 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import './App.css';
 import Header from './components/header/header'
 import Auth from './pages/auth/auth';
 import Tasks from './pages/tasks';
+import withAuthentication from './hoc/withAuthentication';
+
 import {
   BrowserRouter as Router,
   Route,
 } from "react-router-dom";
 
-function App() {
+function App(props) {
+  console.log(props)
   return (
-    <Grid>
-      <Header />
+    <div>
+      <Header isLoggedIn={props.isLoggedIn} dispatch={props.dispatch} />
       <Router>
-        <Route path="/"><Auth /></Route>
-        <Route path="/tasks"><Tasks /></Route>
+        <Route exact path="/" component={Auth} />
+        <Route path="/tasks" component={Tasks} />
       </Router>
-    </Grid >
+    </div>
   );
 }
 
-export default App;
+export default withAuthentication(App);
+// export default App
