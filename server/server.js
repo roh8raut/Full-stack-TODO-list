@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(() => console.log('--------------------------------------------MongoDB Connected--------------------------------------------------------------------------------'))
   .catch(err => console.log(err));
 
-var whitelist = ['http://localhost:3000', 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'];
+var whitelist = ['http://localhost:3000', 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', 'https://todo-react-client.vercel.app'];
 var corsOptions = {
   origin: function (origin, callback) {
     console.log(origin);
