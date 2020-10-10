@@ -1,13 +1,19 @@
 const initialState = {
     isLoading: false,
-    error: null,
     isAuthUser: !!localStorage.getItem("token"),
-    tasks: localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : []
+    responseObj: {}
 }
 
 export const authReducer = (state = initialState, action) => {
+    if (action.type === "CHANGE_TAB") {
+        return {
+            state: initialState
+        }
+    }
+
     if (action.type === "LOADING") {
         return {
+            ...state,
             isLoading: true
         }
     }
@@ -19,15 +25,43 @@ export const authReducer = (state = initialState, action) => {
             ...state,
             isLoading: false,
             isAuthUser: true,
-            tasks: action.payload.tasks,
         };
     }
 
     if (action.type === "LOGIN_FAILURE") {
         return {
             isLoading: false,
-            error: action.payload
+            responseObj: action.payload
+        };
+    }
+
+    if (action.type === "SIGNUP_SUCCESS") {
+        return {
+            isLoading: false,
+            responseObj: action.payload
+        };
+    }
+
+    if (action.type === "SIGNUP_FAILURE") {
+        console.log("singupfailed", action.payload)
+        return {
+            isLoading: false,
+            responseObj: action.payload
+        };
+    }
+
+    if (action.type === "LOGOUT") {
+        localStorage.removeItem("token");
+        localStorage.removeItem("tasks");
+        return {
+            isAuthUser: false
         };
     }
     return state;
 };
+
+export const authMessageSelector = (state) => {
+    const responseObj = state.authReducer.responseObj;
+    console.log("resPonseObj", responseObj);
+    return (responseObj && responseObj.msg) ? responseObj.msg : undefined;
+}

@@ -5,7 +5,6 @@ import { authReducer } from './reducers/authreducer';
 import { tabsReducer } from './reducers/tabsreducer';
 import { tasksReducer } from './reducers/tasksreducer';
 
-
 const reducer = combineReducers({
     form: reduxFormReducer,
     authReducer,
