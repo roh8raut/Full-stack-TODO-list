@@ -43,7 +43,6 @@ export const authReducer = (state = initialState, action) => {
     }
 
     if (action.type === "SIGNUP_FAILURE") {
-        console.log("singupfailed", action.payload)
         return {
             isLoading: false,
             responseObj: action.payload
@@ -62,6 +61,5 @@ export const authReducer = (state = initialState, action) => {
 
 export const authMessageSelector = (state) => {
     const responseObj = state.authReducer.responseObj;
-    console.log("resPonseObj", responseObj);
     return (responseObj && responseObj.msg) ? responseObj.msg : undefined;
 }

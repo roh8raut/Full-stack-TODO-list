@@ -11,7 +11,6 @@ import {
 } from "react-router-dom";
 
 function App(props) {
-  console.log(props)
   return (
     <div>
       <Header isLoggedIn={props.isLoggedIn} dispatch={props.dispatch} />

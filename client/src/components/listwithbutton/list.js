@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 
 
 const List = ({ task, handleClick, list }) => {
-    console.log(list)
     const [loading, setLoading] = useState(false);
 
     const handleIconClick = (e, id) => {

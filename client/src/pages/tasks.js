@@ -56,7 +56,6 @@ export class Tasks extends Component {
 
 
     renderAddField = ({ label, input, meta, ...custom }) => {
-        console.log("custom", custom)
         return <TextField
             label={label}
             type="text"
@@ -70,7 +69,6 @@ export class Tasks extends Component {
 
     componentDidMount() {
         this.props.loadTasks();
-        console.log("props", this.props);
     }
 
     handleDeleteClick = (e, data) => {
@@ -123,7 +121,6 @@ const resetFormOnSuccess = (res, dispatch) => {
 }
 
 const mapStateToProps = state => {
-    console.log("<<<<<<<<<<<<<<<<<<tasks.js>>>>>>>>", state);
     return {
         isLoading: state.tasksReducer.isLoading,
         isAuthUser: state.authReducer.isAuthUser,

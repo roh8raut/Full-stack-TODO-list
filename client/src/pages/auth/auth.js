@@ -67,7 +67,6 @@ class Auth extends Component {
     }
 
     render() {
-        console.log("classes", this.props.classes)
         if (this.props.isAuthUser) {
             return <Redirect to="/tasks" />
         }
@@ -94,7 +93,6 @@ class Auth extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log("<<<<<<<<<<<<<<<<<<auth.js>>>>>>>>", authMessageSelector(state));
     return {
         tabValue: state.tabsReducer.tabValue,
         isLoading: state.authReducer.isLoading,
